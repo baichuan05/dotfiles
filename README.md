@@ -12,5 +12,3 @@
   * Install `brew install fzf`
   * Add `[-f ~/.fzf.zsh] && source ~/.fzf.zsh` to `.zshrc`
 
-# Mac tools
-* Raycast
