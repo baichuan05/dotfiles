@@ -21,3 +21,6 @@
   $(brew --prefix)/opt/fzf/install
   ```
 
+# Windows (test)
+1. WezTerm
+2. Starship
