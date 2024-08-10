@@ -1,6 +1,7 @@
 # Terminal Theme
 * Snazzy
-  * mac: https://github.com/sindresorhus/iterm2-snazzy 
+  * mac: https://github.com/sindresorhus/iterm2-snazzy
+  * windows: https://github.com/atomcorp/themes
 
 # Command line tools
 * Prezto: https://github.com/sorin-ionescu/prezto
