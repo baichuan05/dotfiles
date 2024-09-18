@@ -27,3 +27,4 @@
 
 # Linux
 1. flameshot: https://flameshot.org/
+2. CopyQ
