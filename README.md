@@ -24,3 +24,6 @@
 # Windows (test)
 1. WezTerm
 2. Starship
+
+# Linux
+1. flameshot: https://flameshot.org/
