@@ -2,6 +2,7 @@
 * Snazzy
   * mac: https://github.com/sindresorhus/iterm2-snazzy
   * windows: https://github.com/atomcorp/themes
+  * linux: https://github.com/EliverLara/terminator-themes.git
 
 # Command line tools
 * Prezto: https://github.com/sorin-ionescu/prezto
@@ -20,10 +21,6 @@
   # To install useful key bindings and fuzzy completion:
   $(brew --prefix)/opt/fzf/install
   ```
-
-# Windows (test)
-1. WezTerm
-2. Starship
 
 # Linux
 1. flameshot: https://flameshot.org/
