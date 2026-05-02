@@ -61,7 +61,7 @@ echo -e "${YELLOW}Setting up dotfiles...${NC}"
 if [ ! -d "$DOTFILES_DIR" ]; then
   git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
 else
-  cd "$DOTFILES_DIR" && git pull origin main
+  cd "$DOTFILES_DIR" && git pull origin master
 fi
 
 echo -e "${YELLOW}Installing Prezto...${NC}"

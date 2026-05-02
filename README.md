@@ -3,7 +3,7 @@
 Run the automated setup script to install and configure your dev environment:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/baichuan05/dotfiles/main/setup-ubuntu.sh | bash
+curl -fsSL https://raw.githubusercontent.com/baichuan05/dotfiles/master/setup-ubuntu.sh | bash
 ```
 
 This script will:
