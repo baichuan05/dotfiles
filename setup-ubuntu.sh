@@ -14,7 +14,7 @@ echo -e "${YELLOW}Updating package manager and installing core tools...${NC}"
 sudo apt update
 
 # 1. Install core system packages
-sudo apt install -y zsh curl zoxide bat flameshot yazi
+sudo apt install -y zsh curl zoxide bat flameshot yazi fzf
 
 # 2. Install External Tools
 echo -e "${YELLOW}Installing VSCode...${NC}"
@@ -102,6 +102,20 @@ y() {
 	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
+EOF
+fi
+
+if ! grep -q "fzf/examples/key-bindings.zsh" "${ZDOTDIR:-$HOME}/.zshrc"; then
+  echo -e "${YELLOW}Adding fzf bindings to .zshrc...${NC}"
+  cat >> "${ZDOTDIR:-$HOME}/.zshrc" << 'EOF'
+
+# fzf bindings
+if [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
+fi
+if [ -f /usr/share/doc/fzf/examples/completion.zsh ]; then
+    source /usr/share/doc/fzf/examples/completion.zsh
+fi
 EOF
 fi
 

@@ -21,17 +21,6 @@ sudo dnf install -y zsh tar gzip git util-linux
 echo -e "${YELLOW}Installing zoxide...${NC}"
 curl -sSf https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
-# Install bat (via official binary if dnf fails, but we'll try dnf first or just download standard)
-echo -e "${YELLOW}Attempting to install bat...${NC}"
-sudo dnf install -y bat || echo -e "${RED}bat not found in default dnf repos.${NC}"
-
-# Install yazi (via official script/binary, as AL2023 dnf repos might lack it)
-# We will use the cargo/binary approach or just warn.
-echo -e "${YELLOW}Attempting to install yazi...${NC}"
-if ! command -v yazi &> /dev/null; then
-  echo -e "${RED}yazi might need manual installation via cargo on AL2023.${NC}"
-fi
-
 # 2. Install External Tools
 echo -e "${YELLOW}Installing VSCode Server/Desktop...${NC}"
 if ! command -v code &> /dev/null; then
@@ -51,9 +40,6 @@ if ! command -v uv &> /dev/null; then
 else
   echo -e "${GREEN}uv already installed${NC}"
 fi
-
-echo -e "${YELLOW}Skipping Ghostty (Ubuntu-specific script)...${NC}"
-# Ghostty bash script is marked for Ubuntu, so we skip it here.
 
 # 3. Clone Dotfiles & Setup Prezto
 DOTFILES_REPO="https://github.com/baichuan05/dotfiles"
@@ -84,27 +70,14 @@ cp "$DOTFILES_DIR/.zpreztorc" "${ZDOTDIR:-$HOME}/.zpreztorc"
 
 # 4. Configure .zshrc helpers
 echo -e "${YELLOW}Updating .zshrc with helpers...${NC}"
+if ! grep -q 'export PATH="$HOME/.local/bin:$PATH"' "${ZDOTDIR:-$HOME}/.zshrc"; then
+  echo "" >> "${ZDOTDIR:-$HOME}/.zshrc"
+  echo 'export PATH="$HOME/.local/bin:$PATH"' >> "${ZDOTDIR:-$HOME}/.zshrc"
+fi
+
 if ! grep -q "zoxide init zsh" "${ZDOTDIR:-$HOME}/.zshrc"; then
   echo "" >> "${ZDOTDIR:-$HOME}/.zshrc"
   echo "eval \"\$($HOME/.local/bin/zoxide init zsh)\"" >> "${ZDOTDIR:-$HOME}/.zshrc"
-fi
-
-if ! grep -q "alias cat='bat'" "${ZDOTDIR:-$HOME}/.zshrc"; then
-  echo "alias cat='bat'" >> "${ZDOTDIR:-$HOME}/.zshrc"
-fi
-
-if ! grep -q "function y()" "${ZDOTDIR:-$HOME}/.zshrc"; then
-  cat >> "${ZDOTDIR:-$HOME}/.zshrc" << 'EOF'
-
-# Yazi function
-y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	command yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
-}
-EOF
 fi
 
 # 5. Set Default Shell
