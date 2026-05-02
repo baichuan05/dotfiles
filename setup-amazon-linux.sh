@@ -15,7 +15,7 @@ sudo dnf update -y
 
 # 1. Install core system packages
 # Note: AL2023 might not have all desktop packages (like flameshot) in default repos
-sudo dnf install -y zsh curl wget tar gzip git util-linux
+sudo dnf install -y zsh tar gzip git util-linux
 
 # Install zoxide (via official script, as it might not be in AL2023 dnf repos)
 echo -e "${YELLOW}Installing zoxide...${NC}"
