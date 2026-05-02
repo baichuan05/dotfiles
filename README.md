@@ -1,9 +1,15 @@
-# Quick Setup on New Ubuntu PC
+# Quick Setup on New PC
 
-Run the automated setup script to install and configure your dev environment:
+Run the automated setup script to install and configure your dev environment.
 
+**For Ubuntu / Debian:**
 ```bash
 curl -fsSL https://raw.githubusercontent.com/baichuan05/dotfiles/master/setup-ubuntu.sh | bash
+```
+
+**For Amazon Linux 2023:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/baichuan05/dotfiles/master/setup-amazon-linux.sh | bash
 ```
 
 This script will:
