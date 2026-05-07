@@ -14,7 +14,7 @@ echo -e "${YELLOW}Updating package manager and installing core tools...${NC}"
 sudo apt update
 
 # 1. Install core system packages
-sudo apt install -y zsh curl zoxide bat flameshot yazi fzf
+sudo apt install -y zsh curl zoxide bat flameshot fzf
 
 # 2. Install External Tools
 echo -e "${YELLOW}Installing VSCode...${NC}"
@@ -36,6 +36,14 @@ else
   echo -e "${GREEN}uv already installed${NC}"
 fi
 
+echo -e "${YELLOW}Installing yazi...${NC}"
+if ! command -v yazi &> /dev/null; then
+  sudo snap install yazi --classic
+  echo -e "${GREEN}yazi installed${NC}"
+else
+  echo -e "${GREEN}yazi already installed${NC}"
+fi
+
 echo -e "${YELLOW}Installing Ghostty...${NC}"
 if ! command -v ghostty &> /dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
@@ -49,7 +57,8 @@ echo -e "${YELLOW}Configuring Ghostty...${NC}"
 mkdir -p "${HOME}/.config/ghostty"
 cat > "${HOME}/.config/ghostty/config" << 'EOF'
 theme = Snazzy Soft
-max-lines = 10000
+scrollback-limit = 10000
+command = zsh
 EOF
 echo -e "${GREEN}Ghostty configured${NC}"
 
@@ -87,6 +96,10 @@ if ! grep -q "zoxide init zsh" "${ZDOTDIR:-$HOME}/.zshrc"; then
   echo "eval \"\$(zoxide init zsh)\"" >> "${ZDOTDIR:-$HOME}/.zshrc"
 fi
 
+if ! grep -q "alias bat='batcat'" "${ZDOTDIR:-$HOME}/.zshrc"; then
+  echo "alias bat='batcat'" >> "${ZDOTDIR:-$HOME}/.zshrc"
+fi
+
 if ! grep -q "alias cat='bat'" "${ZDOTDIR:-$HOME}/.zshrc"; then
   echo "alias cat='bat'" >> "${ZDOTDIR:-$HOME}/.zshrc"
 fi
@@ -117,15 +130,6 @@ if [ -f /usr/share/doc/fzf/examples/completion.zsh ]; then
     source /usr/share/doc/fzf/examples/completion.zsh
 fi
 EOF
-fi
-
-# 6. Set Default Shell
-echo -e "${YELLOW}Setting zsh as default shell...${NC}"
-if [ "$SHELL" != "$(which zsh)" ]; then
-  chsh -s "$(which zsh)"
-  echo -e "${GREEN}Default shell changed to zsh${NC}"
-else
-  echo -e "${GREEN}zsh is already the default shell${NC}"
 fi
 
 echo -e "${GREEN}=== Setup Complete ===${NC}"
