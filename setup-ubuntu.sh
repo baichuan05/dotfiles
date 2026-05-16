@@ -57,7 +57,7 @@ echo -e "${YELLOW}Configuring Ghostty...${NC}"
 mkdir -p "${HOME}/.config/ghostty"
 cat > "${HOME}/.config/ghostty/config" << 'EOF'
 theme = Snazzy Soft
-scrollback-limit = 10000
+scrollback-limit = 100000
 command = zsh
 EOF
 echo -e "${GREEN}Ghostty configured${NC}"
